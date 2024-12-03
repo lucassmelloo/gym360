@@ -6,7 +6,7 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class AttendanceList extends Model
+class Attendance extends Model
 {
     protected $guarded = [];
 

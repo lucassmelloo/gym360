@@ -19,7 +19,7 @@ class Student extends Model
 
     public function attendances() : HasMany
     {
-        return $this->hasMany(AttendanceList::class);
+        return $this->hasMany(Attendance::class);
     }
 
 }
