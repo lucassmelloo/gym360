@@ -20,6 +20,13 @@ class StudentSeeder extends Seeder
                 'observation'=> 'Fisiculturista',
                 'date_of_birth'=> '1999-04-21'
             ],
+            [
+                'name'=>'Jonatas Braz',
+                'email'=> 'jonatasbsmcarvalho@hotmail.com',
+                'telephone'=>'75 983082626',
+                'observation'=> 'Aspirante a Iron Man',
+                'date_of_birth'=> '2002-05-20'
+            ]
         ];
 
         foreach($students as $student)
