@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignIdFor(Student::class)->constrained();
             $table->date('attendance_date');
             $table->timestamps();
+            $table->unique(['student_id', 'attendance_date']);
         });
     }
     
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('attendance_list');
+        Schema::dropIfExists('attendances');
     }
 };

@@ -5,10 +5,12 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ExerciseResource\Pages;
 use App\Filament\Resources\ExerciseResource\RelationManagers;
 use App\Models\Exercise;
+use App\Models\Muscle;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -29,6 +31,7 @@ class ExerciseResource extends Resource
             
                 Forms\Components\Select::make('muscles')
                     ->multiple()
+                    ->preload()
                     ->label('Músculos')
                     ->relationship('muscles','name')
             ]);
@@ -41,14 +44,19 @@ class ExerciseResource extends Resource
             Tables\Columns\TextColumn::make('name')
                 ->label('Nome Exercicio')
                 ->limit(50)
-                ->searchable(),
+                ->searchable()
+                ->sortable(),
             Tables\Columns\TextColumn::make('muscles.name')
                 ->label('Músculos')
                 ->width('500px')
                 ->color('gray')
-                ->searchable()
         ])
         ->filters([
+            SelectFilter::make('muscles')
+                ->relationship('muscles','name')
+                ->multiple()
+                ->preload()
+                ->options(Muscle::all()->pluck('name','id'))
         ])
         ->actions([
             Tables\Actions\EditAction::make(),
