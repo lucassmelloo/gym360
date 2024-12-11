@@ -82,17 +82,9 @@ class AttendanceResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ])
-            ->reactive() // Ativa a reatividade da tabela
-            ->listeners([
-                'attendance-table-updated' => 'refreshTable',
             ]);
     }
 
-    public function refreshTable(): void
-    {
-        $this->dispatchBrowserEvent('refresh');
-    }
 
 
     public static function getPages(): array
