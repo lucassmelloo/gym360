@@ -33,9 +33,9 @@ class StudentResource extends Resource
                 PhoneInput::make('telephone')
                     ->label('Telefone')
                     ->defaultCountry('BR'),
-                Forms\Components\TextInput::make('observation')
+                Forms\Components\RichEditor::make('observation')
                     ->label('Observações')
-                    ->maxLength(255),
+                    ->columnSpanFull(),
                 DatePicker::make('date_of_birth')
                     ->minDate(now()->subYears(150))
                     ->maxDate(now())

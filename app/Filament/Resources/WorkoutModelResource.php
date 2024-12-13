@@ -8,6 +8,7 @@ use App\Models\WorkoutModel;
 use App\Models\WorkoutType;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\FormsComponent;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
@@ -26,7 +27,7 @@ class WorkoutModelResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
-                    ->label('Nome do treino')
+                    ->label('Nome do modelo de Treino')
                     ->columnSpan(1),
 
                 Forms\Components\Placeholder::make('user.name')
@@ -34,9 +35,10 @@ class WorkoutModelResource extends Resource
                     ->columnSpan(1)
                     ->content(fn ($record) => $record->user->name ?? auth()->user()->name),
 
-                Forms\Components\Select::make('workout_type_id')
-                    ->label('Tipo treino')
-                    ->options(WorkoutType::all()->pluck('name','id')),
+                Forms\Components\RichEditor::make('observation')
+                    ->label('Observação')
+                    ->columnSpanFull(),
+
 
                 Forms\Components\Hidden::make('user_id')
                     ->default(auth()->user()->id),
@@ -51,10 +53,6 @@ class WorkoutModelResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->label('Nome')
-                    ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('workout_type.name')
-                    ->label('Tipo treino')
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('user.name')

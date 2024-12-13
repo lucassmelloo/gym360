@@ -75,7 +75,7 @@ class AttendanceSearchWidget extends Widget implements HasForms
                     ->info()
                     ->send();
 
-            $this->notify('attendance-table-updated');
+            $this->form->fill();
 
         }
         catch (QueryException $err)
