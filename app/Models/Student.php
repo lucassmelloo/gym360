@@ -38,31 +38,41 @@ class Student extends Model
     }
 
     public function daysUntilBirthday(): ?string
-{
-    if (!$this->date_of_birth) {
+    {
+        if (!$this->date_of_birth) {
+            return null;
+        }
+
+        // Normalizar para garantir que apenas a data (sem horas) seja considerada
+        $today = now()->startOfDay();
+        $dateOfBirth = $this->date_of_birth->copy()->startOfDay();
+
+        // Determinar o próximo aniversário
+        $nextBirthday = $dateOfBirth->setYear($today->year);
+
+        // Ajustar para o próximo ano se o aniversário já passou
+        if ($nextBirthday->lessThan($today)) {
+            $nextBirthday->addYear();
+        }
+
+        // Verificar se é hoje
+        if ($nextBirthday->isToday()) {
+            return "Hoje é aniversário de {$this->name}!";
+        }
+
+        // Calcular diferença em dias
+        $daysUntil = $today->diffInDays($nextBirthday);
+
+        if ($daysUntil == 1) {
+            return "Falta {$daysUntil} dia para o aniversário de {$this->name}.";
+        }
+        
+        if ($daysUntil <= 5) {
+            return "Faltam {$daysUntil} dias para o aniversário de {$this->name}.";
+        }
+
         return null;
     }
 
-    $today = now();
-    $nextBirthday = $this->date_of_birth->copy()->setYear($today->year);
-
-    // Ajusta para o próximo ano se o aniversário já passou
-    if ($nextBirthday->isPast() && !$nextBirthday->isToday()) {
-        $nextBirthday->addYear();
-    }
-
-    // Verifica se o aniversário é hoje
-    if ($nextBirthday->isToday()) {
-        return "Hoje é aniversário de {$this->name}!";
-    }
-
-    $daysUntil = $today->diffInDays($nextBirthday);
-
-    if ($daysUntil <= 5) {
-        return "Faltam {$daysUntil} dias para o aniversário de {$this->name}.";
-    }
-
-    return null;
-}
 
 }

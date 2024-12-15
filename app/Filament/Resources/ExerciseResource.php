@@ -19,7 +19,7 @@ class ExerciseResource extends Resource
 {
     protected static ?string $model = Exercise::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'healthicons-f-exercise';
 
     public static function form(Form $form): Form
     {
@@ -73,6 +73,11 @@ class ExerciseResource extends Resource
         return [
             'index' => Pages\ManageExercises::route('/'),
         ];
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Gestão de Treinos';
     }
 
     public static function getLabel(): ?string

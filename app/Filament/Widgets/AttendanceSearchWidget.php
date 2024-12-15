@@ -67,12 +67,14 @@ class AttendanceSearchWidget extends Widget implements HasForms
             Notification::make()
                 ->title('Presença marcada com Sucesso')
                 ->success()
+                ->seconds(5)
                 ->send();
 
             if($birthdayMessage)
                 Notification::make()
                     ->title($birthdayMessage)
                     ->info()
+                    ->seconds(5)
                     ->send();
 
             $this->form->fill();
@@ -84,12 +86,14 @@ class AttendanceSearchWidget extends Widget implements HasForms
                 Notification::make()
                     ->title('Aluno não encontrado.')
                     ->danger()
+                    ->seconds(5)
                     ->send();
 
             if($err->getCode() === "23000" && $data['student_id'] ==! null)
                 Notification::make()
                     ->title('Presença já registrada hoje.')
                     ->danger()
+                    ->seconds(5)
                     ->send();
                 
         }

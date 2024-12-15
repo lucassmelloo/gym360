@@ -86,13 +86,16 @@ class AttendanceResource extends Resource
             ->poll('2s');
     }
 
-
-
     public static function getPages(): array
     {
         return [
             'index' => Pages\ManageAttendances::route('/'),
         ];
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Gestão de Pessoas';
     }
 
     public static function getLabel(): ?string

@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use App\Models\WorkoutType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,8 +15,11 @@ return new class extends Migration
     {
         Schema::create('workouts', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
             $table->foreignIdFor(User::class)->constrained();
-            $table->morphs('workoutble');
+            $table->foreignIdFor(WorkoutType::class)->constrained();
+            $table->text('observation')->nullable();
+            $table->boolean('public');
             $table->timestamps();
         });
     }
