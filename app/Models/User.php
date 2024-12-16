@@ -56,5 +56,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Workout::class);
     }
+
+    public function workout_division_exercises() : HasMany
+    {
+        return $this->hasMany(WorkoutDivisionExercise::class);
+    }
     
 }

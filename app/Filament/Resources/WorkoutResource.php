@@ -78,38 +78,35 @@ class WorkoutResource extends Resource
                                     ->required()
                                     ->default(fn ($get) => 'Treino ' . chr(64 + (count($get('../')) ?? 0))),
 
-                                TableRepeater::make('exercises')
+                                TableRepeater::make('workout_division_exercises')
+                                    ->relationship()
+                                    ->orderColumn('order')
                                     ->label('Exercicios')
                                     ->headers([
-                                        Header::make('Metodo'),
-                                        Header::make('Exercício'),
+                                        Header::make('Metodo')->width('250px')->markAsRequired(),
+                                        Header::make('Exercício')->width('250px')->markAsRequired(),
                                         Header::make('Series'),
-                                        Header::make('Repetições'),
+                                        Header::make('Repetições')->width('300px')->markAsRequired(),
                                     ])
                                     ->schema([
-                                        Forms\Components\Select::make('methods')
+                                        Forms\Components\Hidden::make('user_id')
+                                            ->default(auth()->user()->id),
+                                        Forms\Components\Select::make('method_id')
                                             ->preload()
                                             ->options(Method::all()->pluck('name','id')),
-                                        Forms\Components\Select::make('methods')
+                                        Forms\Components\Select::make('exercise_id')
                                             ->preload()
                                             ->searchable()
                                             ->options(Exercise::all()->pluck('name','id')),
-                                        Forms\Components\TextInput::make('series'),
-                                        Forms\Components\TextInput::make('reps')
+                                        Forms\Components\TextInput::make('series')->numeric(),
+                                        Forms\Components\TextInput::make('repetitions')
                                             ->required(),
 
                                     ])
-                                /* Forms\Components\Repeater::make('methods')
-                                    ->label('Metodos')
-                                    ->simple(
-                                        Forms\Components\Select::make('Exercicios')
-                                            ->preload()
-                                            ->options(Method::all()->pluck('name','id'))
-                                    ), */
+                                    
                                     
                             ])
                             ->addActionLabel('Adicionar Divisão')
-                            ->orderColumn('order')
                         
                     ])
                     
