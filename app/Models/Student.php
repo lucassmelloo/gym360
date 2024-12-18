@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
 
@@ -27,6 +28,17 @@ class Student extends Model
     {
         return $this->hasMany(Attendance::class);
     }
+
+    public function workouts() : HasMany
+    {
+        return $this->hasMany(Workout::class);
+    }
+
+    public function principal_workout()
+    {
+        return $this->belongsTo(Workout::class, 'workout_id');
+    }
+
 
     public static function missingOnDate($date = null)
     {

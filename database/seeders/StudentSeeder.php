@@ -32,50 +32,8 @@ class StudentSeeder extends Seeder
                 'email'=> 'lisandra@vidaativa.com',
                 'telephone'=>'71 991631122',
                 'observation'=> 'Come bolo todo dia',
-                'date_of_birth'=> '2002-12-20'
+                'date_of_birth'=> '2002-12-20',
             ],
-            [
-                'name'=>'Ferrugem',
-                'email'=> 'ferrugem@vidaativa.com',
-                'telephone'=>'75 983082626',
-                'observation'=> 'Cantor com rotina corrida, vem pouco, uma vez ou outra devido a rotina de Shows',
-                'date_of_birth'=> '2002-12-15'
-            ],
-            [
-                'name'=>'Milena',
-                'email'=> 'milena@vidaativa.com',
-                'telephone'=>'75 983082626',
-                'observation'=> 'Coronel Alemã, barra pesada',
-                'date_of_birth'=> '2002-12-25'
-            ],
-            [
-                'name'=>'Camila',
-                'email'=> 'camila@vidaativa.com',
-                'telephone'=>'75 983082626',
-                'observation'=> 'Abandonou o aluno Lucas para trabalhar de manhã',
-                'date_of_birth'=> '2002-12-30'
-            ],
-            [
-                'name'=>'Kaique',
-                'email'=> 'kaique@vidaativa.com',
-                'telephone'=>'75 983082626',
-                'observation'=> 'Abandonou o aluno Lucas para trabalhar de manhã',
-                'date_of_birth'=> '2002-01-05'
-            ],
-            [
-                'name'=>'Felipe Gallo',
-                'email'=> 'galllo@vidaativa.com',
-                'telephone'=>'75 983082626',
-                'observation'=> 'The boss',
-                'date_of_birth'=> '2002-01-10'
-            ],
-            [
-                'name'=>'Tamara',
-                'email'=> 'tamara@vidaativa.com',
-                'telephone'=>'75 983082626',
-                'observation'=> 'Sumida desde 2000',
-                'date_of_birth'=> '2002-01-15'
-            ]
         ];
 
         foreach($students as $student)

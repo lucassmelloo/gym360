@@ -18,12 +18,12 @@ return new class extends Migration
         Schema::create('workout_division_exercises', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class)->constrained();
-            $table->foreignIdFor(WorkoutDivision::class)->constrained();
+            $table->foreignIdFor(WorkoutDivision::class)->constrained()->onDelete('cascade');
             $table->foreignIdFor(Method::class)->constrained();
             $table->foreignIdFor(Exercise::class)->constrained();
             $table->tinyInteger('series');
             $table->string('repetitions');
-            $table->tinyInteger('order');
+            $table->tinyInteger('order')->nullable();
             $table->timestamps();
 
         });

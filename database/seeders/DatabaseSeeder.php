@@ -8,6 +8,7 @@ namespace Database\Seeders;
 
 use App\Models\Student;
 use App\Models\User;
+use App\Models\WorkoutDivisionExercise;
 use App\Models\WorkoutType;
 use Illuminate\Database\Seeder;
 
@@ -27,7 +28,9 @@ class DatabaseSeeder extends Seeder
             ExerciseMuscleSeeder::class,
             WorkoutTypeSeeder::class,
             WorkoutSeeder::class,
-            MethodsSeeder::class
+            MethodsSeeder::class,
+            WorkoutDivisionSeeder::class,
+            WorkoutDivisionExerciseSeeder::class
         ]);
     }
 }

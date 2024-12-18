@@ -41,6 +41,10 @@ class ExerciseResource extends Resource
     {
         return $table
         ->columns([
+            Tables\Columns\TextColumn::make('id')
+                ->label('Id')
+                ->searchable()
+                ->sortable(),
             Tables\Columns\TextColumn::make('name')
                 ->label('Nome Exercicio')
                 ->limit(50)

@@ -12,6 +12,6 @@ class WorkoutType extends Model
 
     public function workout_type() : HasMany
     {
-        return $this->hasMany(WorkoutModel::class);
+        return $this->hasMany(Workout::class);
     }
 }

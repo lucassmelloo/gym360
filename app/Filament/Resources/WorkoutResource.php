@@ -5,11 +5,14 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\WorkoutResource\Pages;
 use App\Models\Exercise;
 use App\Models\Method;
+use App\Models\Student;
 use App\Models\User;
 use App\Models\Workout;
 use App\Models\WorkoutType;
 use Awcodes\TableRepeater\Components\TableRepeater;
 use Awcodes\TableRepeater\Header;
+use Carbon\Carbon;
+use FFI;
 use Filament\Forms;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
@@ -34,23 +37,42 @@ class WorkoutResource extends Resource
                     ->required()
                     ->default(auth()->user()->id),
 
-                Forms\Components\TextInput::make('title')
-                    ->label('Titúlo')
-                    ->columnSpanFull(),
-
-                Forms\Components\Grid::make(4)
+                Forms\Components\Select::make('student_id')
+                    ->label('Aluno')
+                    ->searchable()
+                    ->preload()
+                    ->required()
+                    ->options(fn()=> Student::all()->pluck('name','id')),
+                
+                Forms\Components\Placeholder::make('user.name')
+                    ->label('Criado por')
+                    ->columnSpan(1)
+                    ->content(fn ($record) => $record->user->name ?? auth()->user()->name),
+                        
+                
+                Forms\Components\Grid::make(5)
                     ->schema([
+                        Forms\Components\DatePicker::make('start_date')
+                            ->label('Data de Inicio')
+                            ->displayFormat('d/m/Y') 
+                            ->format('Y-m-d') 
+                            ->default(now())
+                            ->columnSpan(1)
+                            ->required(),
+
+                        Forms\Components\DatePicker::make('due_date')
+                            ->label('Data de Validade')
+                            ->displayFormat('d/m/Y') 
+                            ->format('Y-m-d') 
+                            ->columnSpan(1)
+                            ->default(now()->addDays(45))
+                            ->required(),
 
                         Forms\Components\Select::make('workout_type_id')
                             ->label('Tipo de treino')
                             ->required()
-                            ->columnSpan(2)
-                            ->relationship('workout_type','name', ),
-            
-                        Forms\Components\Placeholder::make('user.name')
-                            ->label('Criado por')
                             ->columnSpan(1)
-                            ->content(fn ($record) => $record->user->name ?? auth()->user()->name),
+                            ->relationship('workout_type','name', ),
                         
                         Forms\Components\Toggle::make('public')
                             ->default(true)
@@ -61,9 +83,6 @@ class WorkoutResource extends Resource
                             ->label('Público'),
                     ]),
                     
-                Forms\Components\RichEditor::make('observation')
-                    ->label('Detalhes')
-                    ->columnSpanFull(),
 
                 Forms\Components\Section::make('Divisões do Treino')
                     ->icon('phosphor-list-bullets-bold')
@@ -71,6 +90,7 @@ class WorkoutResource extends Resource
                     ->schema([
                         Forms\Components\Repeater::make('workout_divisions')
                             ->relationship()
+                            ->orderColumn('order')
                             ->label('Divisões')
                             ->schema([
                                 Forms\Components\TextInput::make('title')
@@ -98,7 +118,9 @@ class WorkoutResource extends Resource
                                             ->preload()
                                             ->searchable()
                                             ->options(Exercise::all()->pluck('name','id')),
-                                        Forms\Components\TextInput::make('series')->numeric(),
+                                        Forms\Components\TextInput::make('series')
+                                            ->numeric()
+                                            ->default(3),
                                         Forms\Components\TextInput::make('repetitions')
                                             ->required(),
 
@@ -115,12 +137,41 @@ class WorkoutResource extends Resource
             ]);
     }
 
+    public static function actions($record): array
+    {
+        return [
+            Forms\Components\Actions\Action::make('tornarPrincipal')
+                ->label('Tornar esse treino principal')
+                ->color('success') // Escolha a cor do botão
+                ->icon('heroicon-o-check-circle') // Ícone para estilizar
+                ->requiresConfirmation() // Confirmação antes de executar
+                ->visible(fn ($record) => $record->student_id !== null) // Visível apenas se houver estudante
+                ->action(function ($record) {
+                    // Atualize o `student_id` do estudante para o ID do Workout atual
+                    $student = $record->student;
+
+                    if ($student) {
+                        $student->update([
+                            'workout_id' => $record->id, // Associe o treino como principal
+                        ]);
+                    }
+
+                    // Mensagem de sucesso
+                    Filament\Notifications\Notification::make()
+                        ->title('Treino atualizado!')
+                        ->body("O treino '{$record->title}' agora é o principal para o estudante {$record->student->name}.")
+                        ->success()
+                        ->send();
+                }),
+        ];
+    }
+
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('title')
-                    ->label('Título')
+                Tables\Columns\TextColumn::make('student.name')
+                    ->label('Aluno')
                     ->searchable()
                     ->sortable(),
                 
@@ -138,6 +189,10 @@ class WorkoutResource extends Resource
                     ->icon('heroicon-o-eye')
             ])
             ->filters([
+                SelectFilter::make('Aluno')
+                    ->relationship('student','name')
+                    ->preload()
+                    ->options(Student::all()->pluck('name','id')),
                 SelectFilter::make('Usuários')
                     ->relationship('user','name')
                     ->multiple()
@@ -148,6 +203,7 @@ class WorkoutResource extends Resource
                     ->multiple()
                     ->preload()
                     ->options(WorkoutType::all()->pluck('name','id'))
+                
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
