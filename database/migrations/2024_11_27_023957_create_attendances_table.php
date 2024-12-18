@@ -22,7 +22,7 @@ return new class extends Migration
             $table->unique(['student_id', 'attendance_date']);
         });
     }
-    
+
     /**
      * Reverse the migrations.
      */

@@ -6,10 +6,6 @@ namespace Database\Seeders;
 
 namespace Database\Seeders;
 
-use App\Models\Student;
-use App\Models\User;
-use App\Models\WorkoutDivisionExercise;
-use App\Models\WorkoutType;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -19,7 +15,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        
+
         $this->call([
             StudentSeeder::class,
             AdminSeeder::class,
@@ -30,7 +26,7 @@ class DatabaseSeeder extends Seeder
             WorkoutSeeder::class,
             MethodsSeeder::class,
             WorkoutDivisionSeeder::class,
-            WorkoutDivisionExerciseSeeder::class
+            WorkoutDivisionExerciseSeeder::class,
         ]);
     }
 }

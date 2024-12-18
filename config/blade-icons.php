@@ -14,7 +14,7 @@ return [
     */
 
     'sets' => [
-        
+
         // 'healthicons' => [
         //     'path' => 'resources\svg\health-icons',
 
@@ -185,6 +185,5 @@ return [
         'default' => 'icon',
 
     ],
-
 
 ];

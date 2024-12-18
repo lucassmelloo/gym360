@@ -13,7 +13,6 @@ class WorkoutDivisionExercise extends Model
     // $table->foreingIdFor(Method::class)->constrained();
     // $table->foreingIdFor(Exercise::class)->constrained();
 
-
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

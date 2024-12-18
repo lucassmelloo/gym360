@@ -8,15 +8,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class WorkoutDivision extends Model
 {
-
     protected $guarded = [];
 
-    public function workout() : BelongsTo
+    public function workout(): BelongsTo
     {
         return $this->belongsTo(Workout::class);
     }
 
-    public function workout_division_exercises() : HasMany
+    public function workout_division_exercises(): HasMany
     {
         return $this->hasMany(WorkoutDivisionExercise::class);
     }

@@ -2,11 +2,9 @@
 
 namespace App\Filament\Widgets;
 
-use App\Filament\Resources\AttendanceResource;
 use App\Models\Attendance;
 use App\Models\Student;
 use Filament\Forms;
-use Livewire\Livewire;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
 use Filament\Notifications\Notification;
@@ -19,11 +17,11 @@ class AttendanceSearchWidget extends Widget implements HasForms
     use Forms\Concerns\InteractsWithForms;
     use HasNotifications;
 
-    public ?array $data = ['student_id'=> null,'user_id'=> null,'attendance_date'=> null];
-    
+    public ?array $data = ['student_id' => null, 'user_id' => null, 'attendance_date' => null];
+
     protected static string $view = 'filament.widgets.attendance-search-widget';
 
-    protected function form(Form $form) : Form
+    protected function form(Form $form): Form
     {
         return $form
             ->schema([
@@ -36,26 +34,26 @@ class AttendanceSearchWidget extends Widget implements HasForms
                     ->label('Marcar Presença')
                     ->searchable()
                     ->preload()
-                    ->options(fn() => Student::missingOnDate()->pluck('name','id'))
+                    ->options(fn () => Student::missingOnDate()->pluck('name', 'id'))
                     ->exists(table: Student::class)
-                    ->suffixAction( 
+                    ->suffixAction(
                         Forms\Components\Actions\Action::make('submit')
                             ->icon('heroicon-o-check')
                             ->action('saveAttendance')
                             ->dispatch('attendanceCreated')
-                    )
+                    ),
             ])
             ->statePath('data')
             ->model(Attendance::class);
-    } 
+    }
 
-    public function saveAttendance(): null {
+    public function saveAttendance(): null
+    {
 
-        try
-        {
+        try {
 
             $data = $this->data;
-                                    
+
             $attendance = Attendance::create([
                 'user_id' => $data['user_id'],
                 'student_id' => $data['student_id'],
@@ -63,51 +61,52 @@ class AttendanceSearchWidget extends Widget implements HasForms
             ]);
 
             $birthdayMessage = $attendance->student->daysUntilBirthday();
-    
+
             Notification::make()
                 ->title('Presença marcada com Sucesso')
                 ->success()
                 ->seconds(5)
                 ->send();
 
-            if($birthdayMessage)
+            if ($birthdayMessage) {
                 Notification::make()
                     ->title($birthdayMessage)
                     ->info()
                     ->seconds(5)
                     ->send();
+            }
 
             $this->form->fill();
 
-        }
-        catch (QueryException $err)
-        {
-            if($err->getCode() === "23000" && $data['student_id'] === null)
+        } catch (QueryException $err) {
+            if ($err->getCode() === '23000' && $data['student_id'] === null) {
                 Notification::make()
                     ->title('Aluno não encontrado.')
                     ->danger()
                     ->seconds(5)
                     ->send();
+            }
 
-            if($err->getCode() === "23000" && $data['student_id'] ==! null)
+            if ($err->getCode() === '23000' && $data['student_id'] == ! null) {
                 Notification::make()
                     ->title('Presença já registrada hoje.')
                     ->danger()
                     ->seconds(5)
                     ->send();
-                
+            }
+
         }
 
         return null;
-        
+
     }
 
     public function mount(): void
-    {        
+    {
         $this->form->fill();
     }
 
-    public function getColumnSpan(): int | string | array
+    public function getColumnSpan(): int|string|array
     {
         return [
             'sm' => 12,
@@ -115,5 +114,4 @@ class AttendanceSearchWidget extends Widget implements HasForms
             'lg' => 12,
         ];
     }
-
 }

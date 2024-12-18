@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\WorkoutDivisionExercise;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class WorkoutDivisionExerciseSeeder extends Seeder
@@ -22,7 +21,7 @@ class WorkoutDivisionExerciseSeeder extends Seeder
                 'exercise_id' => 1,
                 'series' => 3,
                 'repetitions' => '2x10 Drop',
-                'order' => 1
+                'order' => 1,
             ],
             [
                 'user_id' => 1,
@@ -31,7 +30,7 @@ class WorkoutDivisionExerciseSeeder extends Seeder
                 'exercise_id' => 5,
                 'series' => 3,
                 'repetitions' => '10',
-                'order' => 2
+                'order' => 2,
             ],
             [
                 'user_id' => 1,
@@ -40,7 +39,7 @@ class WorkoutDivisionExerciseSeeder extends Seeder
                 'exercise_id' => 6,
                 'series' => 3,
                 'repetitions' => 'Até a falha',
-                'order' => 3
+                'order' => 3,
             ],
             [
                 'user_id' => 1,
@@ -49,7 +48,7 @@ class WorkoutDivisionExerciseSeeder extends Seeder
                 'exercise_id' => 4,
                 'series' => 3,
                 'repetitions' => '10',
-                'order' => 4
+                'order' => 4,
             ],
             [
                 'user_id' => 1,
@@ -58,7 +57,7 @@ class WorkoutDivisionExerciseSeeder extends Seeder
                 'exercise_id' => 7,
                 'series' => 3,
                 'repetitions' => '10',
-                'order' => 5
+                'order' => 5,
             ],
             [
                 'user_id' => 1,
@@ -67,7 +66,7 @@ class WorkoutDivisionExerciseSeeder extends Seeder
                 'exercise_id' => 9,
                 'series' => 3,
                 'repetitions' => '10',
-                'order' => 6
+                'order' => 6,
             ],
 
             //Treino Costas Jon
@@ -78,7 +77,7 @@ class WorkoutDivisionExerciseSeeder extends Seeder
                 'exercise_id' => 15,
                 'series' => 3,
                 'repetitions' => '10',
-                'order' => 1
+                'order' => 1,
             ],
             [
                 'user_id' => 1,
@@ -87,7 +86,7 @@ class WorkoutDivisionExerciseSeeder extends Seeder
                 'exercise_id' => 19,
                 'series' => 3,
                 'repetitions' => '10',
-                'order' => 2
+                'order' => 2,
             ],
             [
                 'user_id' => 1,
@@ -96,7 +95,7 @@ class WorkoutDivisionExerciseSeeder extends Seeder
                 'exercise_id' => 18,
                 'series' => 3,
                 'repetitions' => 'Até a falha',
-                'order' => 3
+                'order' => 3,
             ],
             [
                 'user_id' => 1,
@@ -105,7 +104,7 @@ class WorkoutDivisionExerciseSeeder extends Seeder
                 'exercise_id' => 12,
                 'series' => 3,
                 'repetitions' => '10',
-                'order' => 4
+                'order' => 4,
             ],
             [
                 'user_id' => 1,
@@ -114,7 +113,7 @@ class WorkoutDivisionExerciseSeeder extends Seeder
                 'exercise_id' => 13,
                 'series' => 3,
                 'repetitions' => '10',
-                'order' => 5
+                'order' => 5,
             ],
             [
                 'user_id' => 1,
@@ -123,7 +122,7 @@ class WorkoutDivisionExerciseSeeder extends Seeder
                 'exercise_id' => 17,
                 'series' => 3,
                 'repetitions' => '10',
-                'order' => 6
+                'order' => 6,
             ],
 
             //Treino Perna Jon
@@ -134,7 +133,7 @@ class WorkoutDivisionExerciseSeeder extends Seeder
                 'exercise_id' => 33,
                 'series' => 3,
                 'repetitions' => '10',
-                'order' => 1
+                'order' => 1,
             ],
             [
                 'user_id' => 1,
@@ -143,7 +142,7 @@ class WorkoutDivisionExerciseSeeder extends Seeder
                 'exercise_id' => 34,
                 'series' => 3,
                 'repetitions' => '10',
-                'order' => 2
+                'order' => 2,
             ],
             [
                 'user_id' => 1,
@@ -152,7 +151,7 @@ class WorkoutDivisionExerciseSeeder extends Seeder
                 'exercise_id' => 36,
                 'series' => 3,
                 'repetitions' => 'Até a falha',
-                'order' => 3
+                'order' => 3,
             ],
             [
                 'user_id' => 1,
@@ -161,7 +160,7 @@ class WorkoutDivisionExerciseSeeder extends Seeder
                 'exercise_id' => 37,
                 'series' => 3,
                 'repetitions' => '10',
-                'order' => 4
+                'order' => 4,
             ],
             [
                 'user_id' => 1,
@@ -170,7 +169,7 @@ class WorkoutDivisionExerciseSeeder extends Seeder
                 'exercise_id' => 30,
                 'series' => 3,
                 'repetitions' => '10',
-                'order' => 5
+                'order' => 5,
             ],
             [
                 'user_id' => 1,
@@ -179,7 +178,7 @@ class WorkoutDivisionExerciseSeeder extends Seeder
                 'exercise_id' => 35,
                 'series' => 3,
                 'repetitions' => '10',
-                'order' => 6
+                'order' => 6,
             ],
 
             //Treino Peito Lucas
@@ -190,7 +189,7 @@ class WorkoutDivisionExerciseSeeder extends Seeder
                 'exercise_id' => 1,
                 'series' => 3,
                 'repetitions' => '2x10 Drop',
-                'order' => 1
+                'order' => 1,
             ],
             [
                 'user_id' => 4,
@@ -199,7 +198,7 @@ class WorkoutDivisionExerciseSeeder extends Seeder
                 'exercise_id' => 5,
                 'series' => 3,
                 'repetitions' => '10',
-                'order' => 2
+                'order' => 2,
             ],
             [
                 'user_id' => 4,
@@ -208,7 +207,7 @@ class WorkoutDivisionExerciseSeeder extends Seeder
                 'exercise_id' => 6,
                 'series' => 3,
                 'repetitions' => 'Até a falha',
-                'order' => 3
+                'order' => 3,
             ],
             [
                 'user_id' => 4,
@@ -217,7 +216,7 @@ class WorkoutDivisionExerciseSeeder extends Seeder
                 'exercise_id' => 4,
                 'series' => 3,
                 'repetitions' => '10',
-                'order' => 4
+                'order' => 4,
             ],
             [
                 'user_id' => 4,
@@ -226,7 +225,7 @@ class WorkoutDivisionExerciseSeeder extends Seeder
                 'exercise_id' => 7,
                 'series' => 3,
                 'repetitions' => '10',
-                'order' => 5
+                'order' => 5,
             ],
             [
                 'user_id' => 4,
@@ -235,7 +234,7 @@ class WorkoutDivisionExerciseSeeder extends Seeder
                 'exercise_id' => 9,
                 'series' => 3,
                 'repetitions' => '10',
-                'order' => 6
+                'order' => 6,
             ],
 
             //Treino Costas Lucas
@@ -246,7 +245,7 @@ class WorkoutDivisionExerciseSeeder extends Seeder
                 'exercise_id' => 15,
                 'series' => 3,
                 'repetitions' => '10',
-                'order' => 1
+                'order' => 1,
             ],
             [
                 'user_id' => 4,
@@ -255,7 +254,7 @@ class WorkoutDivisionExerciseSeeder extends Seeder
                 'exercise_id' => 19,
                 'series' => 3,
                 'repetitions' => '10',
-                'order' => 2
+                'order' => 2,
             ],
             [
                 'user_id' => 4,
@@ -264,7 +263,7 @@ class WorkoutDivisionExerciseSeeder extends Seeder
                 'exercise_id' => 18,
                 'series' => 3,
                 'repetitions' => 'Até a falha',
-                'order' => 3
+                'order' => 3,
             ],
             [
                 'user_id' => 4,
@@ -273,7 +272,7 @@ class WorkoutDivisionExerciseSeeder extends Seeder
                 'exercise_id' => 12,
                 'series' => 3,
                 'repetitions' => '10',
-                'order' => 4
+                'order' => 4,
             ],
             [
                 'user_id' => 4,
@@ -282,7 +281,7 @@ class WorkoutDivisionExerciseSeeder extends Seeder
                 'exercise_id' => 13,
                 'series' => 3,
                 'repetitions' => '10',
-                'order' => 5
+                'order' => 5,
             ],
             [
                 'user_id' => 4,
@@ -291,7 +290,7 @@ class WorkoutDivisionExerciseSeeder extends Seeder
                 'exercise_id' => 17,
                 'series' => 3,
                 'repetitions' => '10',
-                'order' => 6
+                'order' => 6,
             ],
 
             //Treino Peito Lis
@@ -302,7 +301,7 @@ class WorkoutDivisionExerciseSeeder extends Seeder
                 'exercise_id' => 1,
                 'series' => 3,
                 'repetitions' => '2x10 Drop',
-                'order' => 1
+                'order' => 1,
             ],
             [
                 'user_id' => 1,
@@ -311,7 +310,7 @@ class WorkoutDivisionExerciseSeeder extends Seeder
                 'exercise_id' => 5,
                 'series' => 3,
                 'repetitions' => '10',
-                'order' => 2
+                'order' => 2,
             ],
             [
                 'user_id' => 1,
@@ -320,7 +319,7 @@ class WorkoutDivisionExerciseSeeder extends Seeder
                 'exercise_id' => 6,
                 'series' => 3,
                 'repetitions' => 'Até a falha',
-                'order' => 3
+                'order' => 3,
             ],
             [
                 'user_id' => 1,
@@ -329,7 +328,7 @@ class WorkoutDivisionExerciseSeeder extends Seeder
                 'exercise_id' => 4,
                 'series' => 3,
                 'repetitions' => '10',
-                'order' => 4
+                'order' => 4,
             ],
             [
                 'user_id' => 1,
@@ -338,7 +337,7 @@ class WorkoutDivisionExerciseSeeder extends Seeder
                 'exercise_id' => 7,
                 'series' => 3,
                 'repetitions' => '10',
-                'order' => 5
+                'order' => 5,
             ],
             [
                 'user_id' => 1,
@@ -347,7 +346,7 @@ class WorkoutDivisionExerciseSeeder extends Seeder
                 'exercise_id' => 9,
                 'series' => 3,
                 'repetitions' => '10',
-                'order' => 6
+                'order' => 6,
             ],
 
             //Treino Costas Lis
@@ -358,7 +357,7 @@ class WorkoutDivisionExerciseSeeder extends Seeder
                 'exercise_id' => 15,
                 'series' => 3,
                 'repetitions' => '10',
-                'order' => 1
+                'order' => 1,
             ],
             [
                 'user_id' => 1,
@@ -367,7 +366,7 @@ class WorkoutDivisionExerciseSeeder extends Seeder
                 'exercise_id' => 19,
                 'series' => 3,
                 'repetitions' => '10',
-                'order' => 2
+                'order' => 2,
             ],
             [
                 'user_id' => 1,
@@ -376,7 +375,7 @@ class WorkoutDivisionExerciseSeeder extends Seeder
                 'exercise_id' => 18,
                 'series' => 3,
                 'repetitions' => 'Até a falha',
-                'order' => 3
+                'order' => 3,
             ],
             [
                 'user_id' => 1,
@@ -385,7 +384,7 @@ class WorkoutDivisionExerciseSeeder extends Seeder
                 'exercise_id' => 12,
                 'series' => 3,
                 'repetitions' => '10',
-                'order' => 4
+                'order' => 4,
             ],
             [
                 'user_id' => 1,
@@ -394,7 +393,7 @@ class WorkoutDivisionExerciseSeeder extends Seeder
                 'exercise_id' => 13,
                 'series' => 3,
                 'repetitions' => '10',
-                'order' => 5
+                'order' => 5,
             ],
             [
                 'user_id' => 1,
@@ -403,7 +402,7 @@ class WorkoutDivisionExerciseSeeder extends Seeder
                 'exercise_id' => 17,
                 'series' => 3,
                 'repetitions' => '10',
-                'order' => 6
+                'order' => 6,
             ],
 
             //Treino Perna Lis
@@ -414,7 +413,7 @@ class WorkoutDivisionExerciseSeeder extends Seeder
                 'exercise_id' => 33,
                 'series' => 3,
                 'repetitions' => '10',
-                'order' => 1
+                'order' => 1,
             ],
             [
                 'user_id' => 1,
@@ -423,7 +422,7 @@ class WorkoutDivisionExerciseSeeder extends Seeder
                 'exercise_id' => 34,
                 'series' => 3,
                 'repetitions' => '10',
-                'order' => 2
+                'order' => 2,
             ],
             [
                 'user_id' => 1,
@@ -432,7 +431,7 @@ class WorkoutDivisionExerciseSeeder extends Seeder
                 'exercise_id' => 36,
                 'series' => 3,
                 'repetitions' => 'Até a falha',
-                'order' => 3
+                'order' => 3,
             ],
             [
                 'user_id' => 1,
@@ -441,7 +440,7 @@ class WorkoutDivisionExerciseSeeder extends Seeder
                 'exercise_id' => 37,
                 'series' => 3,
                 'repetitions' => '10',
-                'order' => 4
+                'order' => 4,
             ],
             [
                 'user_id' => 1,
@@ -450,7 +449,7 @@ class WorkoutDivisionExerciseSeeder extends Seeder
                 'exercise_id' => 30,
                 'series' => 3,
                 'repetitions' => '10',
-                'order' => 5
+                'order' => 5,
             ],
             [
                 'user_id' => 1,
@@ -459,13 +458,14 @@ class WorkoutDivisionExerciseSeeder extends Seeder
                 'exercise_id' => 35,
                 'series' => 3,
                 'repetitions' => '10',
-                'order' => 6
+                'order' => 6,
             ],
 
         ];
 
-        foreach ($workourDivisionExercises as $workourDivisionExercise)
+        foreach ($workourDivisionExercises as $workourDivisionExercise) {
             WorkoutDivisionExercise::create($workourDivisionExercise);
-    
+        }
+
     }
 }

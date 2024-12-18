@@ -32,19 +32,17 @@ class EditStudent extends EditRecord
         return $data;
     }
 
-
-
     protected function mutateFormDataBeforeSave(array $data): array
     {
         if (isset($data['principal_workout'])) {
             $workoutData = $data['principal_workout'];
-    
+
             // Atualiza ou cria o workout
             $principalWorkout = $this->record->principal_workout()->updateOrCreate(
                 ['id' => $this->record->principal_workout->id ?? null],
                 Arr::except($workoutData, ['workout_divisions'])
             );
-    
+
             // Atualiza as divisões do workout
             if (isset($workoutData['workout_divisions'])) {
                 foreach ($workoutData['workout_divisions'] as $divisionData) {
@@ -52,7 +50,7 @@ class EditStudent extends EditRecord
                         ['id' => $divisionData['id'] ?? null],
                         Arr::except($divisionData, ['workout_division_exercises'])
                     );
-    
+
                     // Atualiza os exercícios dentro da divisão
                     if (isset($divisionData['workout_division_exercises'])) {
                         foreach ($divisionData['workout_division_exercises'] as $exerciseData) {
@@ -64,11 +62,10 @@ class EditStudent extends EditRecord
                     }
                 }
             }
-    
+
             unset($data['principal_workout']);
         }
-    
+
         return $data;
     }
-
 }

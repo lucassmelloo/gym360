@@ -9,9 +9,8 @@ class Method extends Model
 {
     protected $guarded = [];
 
-    public function workout_division_exercises() : HasMany
+    public function workout_division_exercises(): HasMany
     {
         return $this->hasMany(WorkoutDivisionExercise::class);
     }
-
 }

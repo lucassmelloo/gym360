@@ -31,5 +31,4 @@ class ManageAttendances extends ManageRecords
     {
         $this->fillTable();
     }
-
 }

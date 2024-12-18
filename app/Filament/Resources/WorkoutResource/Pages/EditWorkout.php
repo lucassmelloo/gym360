@@ -46,5 +46,4 @@ class EditWorkout extends EditRecord
                 }),
         ];
     }
-
 }

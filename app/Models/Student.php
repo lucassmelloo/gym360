@@ -5,7 +5,6 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
 
@@ -24,12 +23,12 @@ class Student extends Model
         'date_of_birth' => 'date',
     ];
 
-    public function attendances() : HasMany
+    public function attendances(): HasMany
     {
         return $this->hasMany(Attendance::class);
     }
 
-    public function workouts() : HasMany
+    public function workouts(): HasMany
     {
         return $this->hasMany(Workout::class);
     }
@@ -38,7 +37,6 @@ class Student extends Model
     {
         return $this->belongsTo(Workout::class, 'workout_id');
     }
-
 
     public static function missingOnDate($date = null)
     {
@@ -51,7 +49,7 @@ class Student extends Model
 
     public function daysUntilBirthday(): ?string
     {
-        if (!$this->date_of_birth) {
+        if (! $this->date_of_birth) {
             return null;
         }
 
@@ -78,13 +76,11 @@ class Student extends Model
         if ($daysUntil == 1) {
             return "Falta {$daysUntil} dia para o aniversário de {$this->name}.";
         }
-        
+
         if ($daysUntil <= 5) {
             return "Faltam {$daysUntil} dias para o aniversário de {$this->name}.";
         }
 
         return null;
     }
-
-
 }

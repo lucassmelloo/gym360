@@ -15,27 +15,28 @@ class MethodsSeeder extends Seeder
         $methods = [
             [
                 'name' => 'Simples',
-                'description' => 'Executa um único exercício, com séries e repetições definidas, ideal para iniciantes ou foco em técnica.'
+                'description' => 'Executa um único exercício, com séries e repetições definidas, ideal para iniciantes ou foco em técnica.',
             ],
             [
                 'name' => 'Bi-set',
-                'description' => 'Dois exercícios intercalados, com ou sem descanso, que trabalham o mesmo grupo muscular ou músculos opostos.'
+                'description' => 'Dois exercícios intercalados, com ou sem descanso, que trabalham o mesmo grupo muscular ou músculos opostos.',
             ],
             [
                 'name' => 'Tri-set',
-                'description' => 'Três exercícios realizados consecutivamente, sem descanso, para aumentar a intensidade e estímulo muscular.'
+                'description' => 'Três exercícios realizados consecutivamente, sem descanso, para aumentar a intensidade e estímulo muscular.',
             ],
             [
                 'name' => 'Circuito',
-                'description' => 'Uma sequência de vários exercícios realizados com pouco ou nenhum descanso, focado em condicionamento físico geral.'
+                'description' => 'Uma sequência de vários exercícios realizados com pouco ou nenhum descanso, focado em condicionamento físico geral.',
             ],
             [
                 'name' => 'Rest-pause',
-                'description' => 'Método onde se trabalha até a falha muscular, seguido por uma pausa curta e repetição do esforço.'
+                'description' => 'Método onde se trabalha até a falha muscular, seguido por uma pausa curta e repetição do esforço.',
             ],
         ];
 
-        foreach ($methods as $method) 
+        foreach ($methods as $method) {
             Method::create($method);
+        }
     }
 }

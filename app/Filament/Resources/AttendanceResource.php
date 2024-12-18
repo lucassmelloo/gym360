@@ -3,8 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\AttendanceResource\Pages;
-use App\Filament\Resources\AttendanceResource\RelationManagers;
-use App\Filament\Widgets\AttendanceSearchWidget;
 use App\Models\Attendance;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
@@ -12,10 +10,8 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Filters\Filter;
-use Filament\Tables\Filters\QueryBuilder\Constraints\DateConstraint;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class AttendanceResource extends Resource
 {
@@ -54,23 +50,23 @@ class AttendanceResource extends Resource
             ])
             ->filters([
                 Filter::make('attendance_date')
-                ->form([
-                    DatePicker::make('Data Inicial')
-                        ->default(now()),
-                    DatePicker::make('Data Final')
-                        ->default(now()),
-                ])
-                ->query(function (Builder $query, array $data): Builder {
-                    return $query
-                        ->when(
-                            $data['Data Inicial'],
-                            fn (Builder $query, $date): Builder => $query->whereDate('attendance_date', '>=', $date),
-                        )
-                        ->when(
-                            $data['Data Final'],
-                            fn (Builder $query, $date): Builder => $query->whereDate('attendance_date', '<=', $date),
-                        );
-                })
+                    ->form([
+                        DatePicker::make('Data Inicial')
+                            ->default(now()),
+                        DatePicker::make('Data Final')
+                            ->default(now()),
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when(
+                                $data['Data Inicial'],
+                                fn (Builder $query, $date): Builder => $query->whereDate('attendance_date', '>=', $date),
+                            )
+                            ->when(
+                                $data['Data Final'],
+                                fn (Builder $query, $date): Builder => $query->whereDate('attendance_date', '<=', $date),
+                            );
+                    }),
 
             ])
 
@@ -102,7 +98,7 @@ class AttendanceResource extends Resource
     {
         return 'Presença';
     }
-    
+
     public static function getPluralLabel(): ?string
     {
         return 'Presenças';

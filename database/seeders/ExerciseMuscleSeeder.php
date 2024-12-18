@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Exercise;
 use App\Models\Muscle;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class ExerciseMuscleSeeder extends Seeder
@@ -14,7 +13,7 @@ class ExerciseMuscleSeeder extends Seeder
      */
     public function run(): void
     {
-    
+
         $relations = [
             // Peito
             'Supino Reto' => ['Peito', 'Tríceps', 'Ombro'],
@@ -52,20 +51,20 @@ class ExerciseMuscleSeeder extends Seeder
             'Rosca Barra Invertida' => ['Bíceps', 'Antebraço'],
 
             // Pernas
-            'Elevação Pelvica' => ['Glúteos','Perna'],
-            'Agachamento Terra' => ['Perna','Quadríceps', 'Posterior da Coxa', 'Glúteos'],
-            'Agachamento Bulgaro' => ['Perna','Quadríceps', 'Glúteos'],
-            'Agachamento Sumo' => ['Perna','Quadríceps', 'Glúteos'],
-            'Legpress Horizontal' => ['Perna','Quadríceps', 'Glúteos'],
-            'Legpress 45' => ['Perna','Quadríceps', 'Glúteos'],
-            'Avanço' => ['Perna','Quadríceps', 'Glúteos'],
-            'Passada' => ['Perna','Quadríceps', 'Glúteos'],
-            'Cadeira Extensora' => ['Perna','Quadríceps'],
-            'Cadeira Flexora' => ['Perna','Posterior da Coxa'],
-            'Mesa Flexora' => ['Perna','Posterior da Coxa'],
-            'Caidera Adutora' => ['Perna','Glúteos'],
-            'Caidera Abdutora' => ['Perna','Glúteos'],
-            'Stiff' => ['Perna','Posterior da Coxa', 'Glúteos'],
+            'Elevação Pelvica' => ['Glúteos', 'Perna'],
+            'Agachamento Terra' => ['Perna', 'Quadríceps', 'Posterior da Coxa', 'Glúteos'],
+            'Agachamento Bulgaro' => ['Perna', 'Quadríceps', 'Glúteos'],
+            'Agachamento Sumo' => ['Perna', 'Quadríceps', 'Glúteos'],
+            'Legpress Horizontal' => ['Perna', 'Quadríceps', 'Glúteos'],
+            'Legpress 45' => ['Perna', 'Quadríceps', 'Glúteos'],
+            'Avanço' => ['Perna', 'Quadríceps', 'Glúteos'],
+            'Passada' => ['Perna', 'Quadríceps', 'Glúteos'],
+            'Cadeira Extensora' => ['Perna', 'Quadríceps'],
+            'Cadeira Flexora' => ['Perna', 'Posterior da Coxa'],
+            'Mesa Flexora' => ['Perna', 'Posterior da Coxa'],
+            'Caidera Adutora' => ['Perna', 'Glúteos'],
+            'Caidera Abdutora' => ['Perna', 'Glúteos'],
+            'Stiff' => ['Perna', 'Posterior da Coxa', 'Glúteos'],
 
             // Abdômen
             'Abdominal Infra' => ['Abdômen'],
@@ -92,6 +91,6 @@ class ExerciseMuscleSeeder extends Seeder
                 $exercise->muscles()->sync($muscleIds);
             }
         }
-    
+
     }
 }

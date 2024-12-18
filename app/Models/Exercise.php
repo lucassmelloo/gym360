@@ -19,7 +19,7 @@ class Exercise extends Model
         return $this->belongsToMany(Muscle::class);
     }
 
-    public function workout_division_exercises() : HasMany
+    public function workout_division_exercises(): HasMany
     {
         return $this->hasMany(WorkoutDivisionExercise::class);
     }
@@ -27,9 +27,9 @@ class Exercise extends Model
     protected function muscleNames(): Attribute
     {
         return Attribute::make(
-            get: fn ($value, $attributes) => is_string(data_get($attributes,'muscles')) 
-                ? json_decode($attributes['muscles'], true) 
-                : data_get($attributes,'muscles'),
+            get: fn ($value, $attributes) => is_string(data_get($attributes, 'muscles'))
+                ? json_decode($attributes['muscles'], true)
+                : data_get($attributes, 'muscles'),
         );
     }
 }

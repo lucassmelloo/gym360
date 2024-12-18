@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ExerciseResource\Pages;
-use App\Filament\Resources\ExerciseResource\RelationManagers;
 use App\Models\Exercise;
 use App\Models\Muscle;
 use Filament\Forms;
@@ -12,8 +11,6 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ExerciseResource extends Resource
 {
@@ -28,48 +25,48 @@ class ExerciseResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->columnSpan(8)
                     ->required(),
-            
+
                 Forms\Components\Select::make('muscles')
                     ->multiple()
                     ->preload()
                     ->label('Músculos')
-                    ->relationship('muscles','name')
+                    ->relationship('muscles', 'name'),
             ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
-        ->columns([
-            Tables\Columns\TextColumn::make('id')
-                ->label('Id')
-                ->searchable()
-                ->sortable(),
-            Tables\Columns\TextColumn::make('name')
-                ->label('Nome Exercicio')
-                ->limit(50)
-                ->searchable()
-                ->sortable(),
-            Tables\Columns\TextColumn::make('muscles.name')
-                ->label('Músculos')
-                ->width('500px')
-                ->color('gray')
-        ])
-        ->filters([
-            SelectFilter::make('muscles')
-                ->relationship('muscles','name')
-                ->multiple()
-                ->preload()
-                ->options(Muscle::all()->pluck('name','id'))
-        ])
-        ->actions([
-            Tables\Actions\EditAction::make(),
-        ])
-        ->bulkActions([
-            Tables\Actions\BulkActionGroup::make([
-                Tables\Actions\DeleteBulkAction::make(),
-            ]),
-        ]);
+            ->columns([
+                Tables\Columns\TextColumn::make('id')
+                    ->label('Id')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('name')
+                    ->label('Nome Exercicio')
+                    ->limit(50)
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('muscles.name')
+                    ->label('Músculos')
+                    ->width('500px')
+                    ->color('gray'),
+            ])
+            ->filters([
+                SelectFilter::make('muscles')
+                    ->relationship('muscles', 'name')
+                    ->multiple()
+                    ->preload()
+                    ->options(Muscle::all()->pluck('name', 'id')),
+            ])
+            ->actions([
+                Tables\Actions\EditAction::make(),
+            ])
+            ->bulkActions([
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                ]),
+            ]);
     }
 
     public static function getPages(): array

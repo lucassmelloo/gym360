@@ -47,19 +47,18 @@ class User extends Authenticatable
         ];
     }
 
-    public function attendances() : HasMany
+    public function attendances(): HasMany
     {
         return $this->hasMany(Attendance::class);
     }
-    
-    public function workouts() : HasMany
+
+    public function workouts(): HasMany
     {
         return $this->hasMany(Workout::class);
     }
 
-    public function workout_division_exercises() : HasMany
+    public function workout_division_exercises(): HasMany
     {
         return $this->hasMany(WorkoutDivisionExercise::class);
     }
-    
 }
