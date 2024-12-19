@@ -102,6 +102,7 @@
 
         /* Ajuste para colocar as datas na mesma linha */
         .workout-details p {
+            
             display: inline-block;
             margin-right: 20px;
             margin-bottom: 8px; /* Ajusta o espaçamento entre as informações */
@@ -126,13 +127,17 @@
             <p><span>Data de Validade:</span> 
                 {{ \Carbon\Carbon::parse(data_get($workout, 'due_date'))->format('d/m/Y') }}
             </p>
-            <p><span>Tipo de Treino: </span>
-                {{ data_get($workout, 'workout_type.name', 'Sem tipo de treino') }}</p>
             
-            <!-- Exibindo a observação do aluno (Rich Text) -->
-            <p><span>Observação do Aluno: <br/></span>{!! $workout->student->observation !!}</p>
         </div>
-
+        <div class="section workout-details">
+            <p><span>Tipo de Treino: </span>{{ data_get($workout, 'workout_type.name', 'Sem tipo de treino') }}</p>
+            <p><span>Professor: </span>{{ data_get($workout, 'user.name') }}</p>
+        </div>
+        <p><span>Observação do Aluno:</span></p>
+        <p>
+            {!! $workout->student->observation !!}
+        </p>
+        
         <div class="section">
             @foreach (data_get($workout, 'workout_divisions') as $division)
             <h4>Divisão: {{ data_get($division, 'title', 'Sem título') }}</h4>

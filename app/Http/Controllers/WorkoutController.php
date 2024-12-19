@@ -11,7 +11,7 @@ class WorkoutController extends Controller
 {
     public function imprimirTreino($id)
     {
-        $workout = Workout::with(['student', 'workout_divisions.workout_division_exercises.method','workout_type'])->findOrFail($id);
+        $workout = Workout::with(['student', 'workout_divisions.workout_division_exercises.method','workout_type', 'user'])->findOrFail($id);
 
         $pdf = PDF::loadView('pdfs.workout', compact('workout'));
 

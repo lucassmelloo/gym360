@@ -19,13 +19,24 @@ class EditStudent extends EditRecord
                 ->label('Imprimir treino')
                 ->color('info')
                 ->icon('phosphor-printer-light')
-                ->url(fn () => route('workouts.imprimir', $this->record->workout_id)) // Chama a rota
-                ->openUrlInNewTab(),
+                ->url(fn () => $this->record->workout_id ? route('workouts.imprimir', $this->record->workout_id) : '#') 
+                ->openUrlInNewTab()
+                ->visible(fn () => !empty($this->record->workout_id)),
+
             Actions\Action::make('editarTreino')
                 ->label('Editar Treino')
-                ->color('primary') // Botão azul
-                ->icon('heroicon-o-rectangle-stack') // Ícone de edição
-                ->url(fn () => route('filament.admin.resources.workouts.edit', $this->record->workout_id)) // Ajuste para a rota correta
+                ->color('primary')
+                ->icon('heroicon-o-rectangle-stack')
+                ->url(fn () => $this->record->workout_id ? route('filament.admin.resources.workouts.edit', $this->record->workout_id) : '#')
+                ->visible(fn () => !empty($this->record->workout_id)),
+                
+            Actions\Action::make('criarTreino')
+                ->label('Criar Treino')
+                ->color('primary')
+                ->icon('heroicon-o-rectangle-stack')
+                ->url(fn () => route('filament.admin.resources.workouts.create'))
+                ->visible(fn () => empty($this->record->workout_id))
+                
                 
         ];
     }
