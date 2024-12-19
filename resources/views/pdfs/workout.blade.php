@@ -132,8 +132,13 @@
         <div class="section workout-details">
             <p><span>Tipo de Treino: </span>{{ data_get($workout, 'workout_type.name', 'Sem tipo de treino') }}</p>
             <p><span>Professor: </span>{{ data_get($workout, 'user.name') }}</p>
-        </div>
-        <p><span>Observação do Aluno:</span></p>
+        </div>        
+        <div class="section workout-details">
+            <p><span>Observação do Aluno:</span></p><br/>
+                <p>
+                    {!! $workout->student->observation !!}
+                </p>
+            </div>
         <p>
             {!! $workout->student->observation !!}
         </p>
