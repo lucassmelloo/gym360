@@ -15,6 +15,18 @@ class EditStudent extends EditRecord
     {
         return [
             Actions\DeleteAction::make(),
+            Actions\Action::make('imprimirTreino')
+                ->label('Imprimir treino')
+                ->color('info')
+                ->icon('phosphor-printer-light')
+                ->url(fn () => route('workouts.imprimir', $this->record->workout_id)) // Chama a rota
+                ->openUrlInNewTab(),
+            Actions\Action::make('editarTreino')
+                ->label('Editar Treino')
+                ->color('primary') // Botão azul
+                ->icon('heroicon-o-rectangle-stack') // Ícone de edição
+                ->url(fn () => route('filament.admin.resources.workouts.edit', $this->record->workout_id)) // Ajuste para a rota correta
+                
         ];
     }
 

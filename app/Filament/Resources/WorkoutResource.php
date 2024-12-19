@@ -13,6 +13,7 @@ use Awcodes\TableRepeater\Components\TableRepeater;
 use Awcodes\TableRepeater\Header;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Filters\SelectFilter;
@@ -128,34 +129,7 @@ class WorkoutResource extends Resource
             ]);
     }
 
-    public static function actions($record): array
-    {
-        return [
-            Forms\Components\Actions\Action::make('tornarPrincipal')
-                ->label('Tornar esse treino principal')
-                ->color('success') // Escolha a cor do botão
-                ->icon('heroicon-o-check-circle') // Ícone para estilizar
-                ->requiresConfirmation() // Confirmação antes de executar
-                ->visible(fn ($record) => $record->student_id !== null) // Visível apenas se houver estudante
-                ->action(function ($record) {
-                    // Atualize o `student_id` do estudante para o ID do Workout atual
-                    $student = $record->student;
-
-                    if ($student) {
-                        $student->update([
-                            'workout_id' => $record->id, // Associe o treino como principal
-                        ]);
-                    }
-
-                    // Mensagem de sucesso
-                    Filament\Notifications\Notification::make()
-                        ->title('Treino atualizado!')
-                        ->body("O treino '{$record->title}' agora é o principal para o estudante {$record->student->name}.")
-                        ->success()
-                        ->send();
-                }),
-        ];
-    }
+    
 
     public static function table(Table $table): Table
     {
