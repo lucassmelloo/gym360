@@ -115,68 +115,57 @@
 
     </style>
 </head>
-<body>
+<body class="bg-white text-gray-900">
+    <div class="container mx-auto p-6 bg-white shadow-lg">
+        <h2 class="text-2xl text-blue-500 text-center mb-6">Aluno: {{ data_get($workout, 'student.name', 'Sem aluno associado') }}</h2>
 
-    <div class="container">
-        <h2>Aluno: {{ data_get($workout, 'student.name', 'Sem aluno associado') }}</h2>
-
-        <div class="section workout-details">
-            <p><span>Data de Início:</span> 
-                {{ \Carbon\Carbon::parse(data_get($workout, 'start_date'))->format('d/m/Y') }}
-            </p>
-            <p><span>Data de Validade:</span> 
-                {{ \Carbon\Carbon::parse(data_get($workout, 'due_date'))->format('d/m/Y') }}
-            </p>
-            
-        </div>
-        <div class="section workout-details">
-            <p><span>Tipo de Treino: </span>{{ data_get($workout, 'workout_type.name', 'Sem tipo de treino') }}</p>
-            <p><span>Professor: </span>{{ data_get($workout, 'user.name') }}</p>
-        </div>        
-        <div class="section workout-details">
-            <p><span>Observação do Aluno:</span></p><br/>
-                <p>
-                    {!! $workout->student->observation !!}
+        <div class="space-y-4">
+            <div class="workout-details flex justify-between">
+                <p><span>Data de Início:</span> 
+                    {{ \Carbon\Carbon::parse(data_get($workout, 'start_date'))->format('d/m/Y') }}
+                </p>
+                <p><span>Data de Validade:</span> 
+                    {{ \Carbon\Carbon::parse(data_get($workout, 'due_date'))->format('d/m/Y') }}
                 </p>
             </div>
-        <p>
-            {!! $workout->student->observation !!}
-        </p>
-        
-        <div class="section">
+            <div class="workout-details flex justify-between">
+                <p><span class="font-bold">Tipo de Treino: </span>{{ data_get($workout, 'workout_type.name', 'Sem tipo de treino') }}</p>
+                <p><span class="font-bold">Professor: </span>{{ data_get($workout, 'user.name') }}</p>
+            </div>
+            <div class="workout-details">
+                <p><span class="font-bold">Observações do Aluno: </span></p>
+                <p class="break-words">
+                    {!! data_get($workout, 'student.observation', 'Sem observação') !!}
+                </p>
+            </div>        
+        </div>
+
+        <div class="space-y-4">
             @foreach (data_get($workout, 'workout_divisions') as $division)
-            <h4>Divisão: {{ data_get($division, 'title', 'Sem título') }}</h4>
-            <table>
-                <tr>
-                    <th>Exercício</th>
-                    <th>Método</th>
-                    <th>Séries</th>
-                    <th>Repetições</th>
-                </tr>
-                <thead>
-                </thead>
-                <tbody>
-                    @foreach (data_get($division, 'workout_division_exercises', []) as $exercise)
-                    <tr>
-                        <td>
-                            <strong>{{ data_get($exercise, 'exercise.name', 'Sem exercício') }}</strong><br>
-                        </td>
-                        <td>
-                            <strong>{{ data_get($exercise, 'method.name', 'Simples') }}</strong><br>
-                        </td>
-                        <td>
-                            <strong>{{ data_get($exercise, 'series') }}</strong><br>
-                        </td>
-                        <td>
-                            <strong>{{ data_get($exercise, 'repetitions', '') }}</strong><br>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                <h4 class="text-blue-500 text-lg">{{ data_get($division, 'title', 'Sem título') }}</h4>
+                <table class="w-full border-collapse">
+                    <thead>
+                        <tr>
+                            <th class="border p-2 bg-blue-500 text-white">Exercício</th>
+                            <th class="border p-2 bg-blue-500 text-white">Método</th>
+                            <th class="border p-2 bg-blue-500 text-white">Séries</th>
+                            <th class="border p-2 bg-blue-500 text-white">Repetições</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (data_get($division, 'workout_division_exercises', []) as $exercise)
+                            <tr class="border-t">
+                                <td class="p-2">{{ data_get($exercise, 'exercise.name', 'Sem exercício') }}</td>
+                                <td class="p-2">{{ data_get($exercise, 'method.name', 'Simples') }}</td>
+                                <td class="p-2">{{ data_get($exercise, 'series') }}</td>
+                                <td class="p-2">{{ data_get($exercise, 'repetitions', '') }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             @endforeach
         </div>
     </div>
-
 </body>
+
 </html>
