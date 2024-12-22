@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Treino - {{ data_get($workout, 'title', 'Sem título') }}</title>
     <style>
+        @page{
+            margin: 0px 25px;
+        }
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -16,30 +19,24 @@
         .container {
             background-color: #ffffff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 20px; /* Padding geral da caixa */
+            padding: 10px;
         }
 
         h1, h2 {
             text-align: center;
             color: #007BFF;
-            margin-top: 5px; /* Ajuste para reduzir o espaço superior */
-            margin-bottom: 15px; /* Ajuste de margem para h1 e h2 */
         }
 
-        .section {
-            margin-bottom: 10px;
-        }
 
         .section h3 {
             color: #444;
             border-bottom: 2px solid #007BFF;
         }
 
-        /* Estilização simples para o nome da divisão */
         h4 {
             color: #007BFF;
-            font-size: 14px; /* Fonte menor para o nome da divisão */
-            margin-bottom: 5px; /* Menor espaçamento abaixo do título */
+            font-size: 14px;
+            margin-bottom: 5px;
         }
 
         table {
@@ -61,27 +58,30 @@
             color: #fff;
         }
 
-        /* Ajustando a largura das colunas */
         th, td {
-            word-wrap: break-word; /* Quebrar palavras longas */
+            word-wrap: break-word;
             overflow: hidden;
-            text-overflow: ellipsis; /* Corta o texto que ultrapassar */
+            text-overflow: ellipse;
         }
 
         th:nth-child(1), td:nth-child(1) {
-            width: 40%; /* Exercício */
+            width: 40;
         }
 
         th:nth-child(2), td:nth-child(2) {
-            width: 20%; /* Método */
+            width: 20;
         }
 
         th:nth-child(3), td:nth-child(3) {
-            width: 15%; /* Séries */
+            width: 15
         }
 
         th:nth-child(4), td:nth-child(4) {
-            width: 25%; /* Repetições */
+            width: 20
+        }
+
+        th:nth-child(5), td:nth-child(5) {
+            width: 5
         }
 
         tr {
@@ -100,18 +100,13 @@
             font-weight: bold;
         }
 
-        /* Ajuste para colocar as datas na mesma linha */
         .workout-details p {
             
             display: inline-block;
             margin-right: 20px;
-            margin-bottom: 8px; /* Ajusta o espaçamento entre as informações */
         }
 
-        /* Adicionando mais controle nas margens */
-        .section p {
-            margin: 5px 0; /* Margem reduzida entre as seções */
-        }
+        
 
     </style>
 </head>
@@ -119,13 +114,16 @@
     <div class="container mx-auto p-6 bg-white shadow-lg">
         <h2 class="text-2xl text-blue-500 text-center mb-6">Aluno: {{ data_get($workout, 'student.name', 'Sem aluno associado') }}</h2>
 
-        <div class="space-y-4">
+        <div class="">
             <div class="workout-details flex justify-between">
                 <p><span>Data de Início:</span> 
                     {{ \Carbon\Carbon::parse(data_get($workout, 'start_date'))->format('d/m/Y') }}
                 </p>
                 <p><span>Data de Validade:</span> 
                     {{ \Carbon\Carbon::parse(data_get($workout, 'due_date'))->format('d/m/Y') }}
+                </p>
+                <p><span>Idade:</span> 
+                    {{ data_get($workout, 'student.date_of_birth.age') }}
                 </p>
             </div>
             <div class="workout-details flex justify-between">
@@ -150,6 +148,7 @@
                             <th class="border p-2 bg-blue-500 text-white">Método</th>
                             <th class="border p-2 bg-blue-500 text-white">Séries</th>
                             <th class="border p-2 bg-blue-500 text-white">Repetições</th>
+                            <th class="border p-2 bg-blue-500 text-white">Peso</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -159,12 +158,15 @@
                                 <td class="p-2">{{ data_get($exercise, 'method.name', 'Simples') }}</td>
                                 <td class="p-2">{{ data_get($exercise, 'series') }}</td>
                                 <td class="p-2">{{ data_get($exercise, 'repetitions', '') }}</td>
+                                <td class="p-2">    </td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
             @endforeach
         </div>
+
+  
     </div>
 </body>
 

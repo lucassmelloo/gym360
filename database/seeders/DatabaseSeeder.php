@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             MethodsSeeder::class,
             WorkoutDivisionSeeder::class,
             WorkoutDivisionExerciseSeeder::class,
+            AttendanceSeeder::class
         ]);
     }
 }
