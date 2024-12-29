@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 namespace Database\Seeders;
 
+use App\Models\RecipientEmail;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -27,7 +28,8 @@ class DatabaseSeeder extends Seeder
             MethodsSeeder::class,
             WorkoutDivisionSeeder::class,
             WorkoutDivisionExerciseSeeder::class,
-            AttendanceSeeder::class
+            RecipientEmailSeeder::class,
+            AttendanceSeeder::class,
         ]);
     }
 }

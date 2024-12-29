@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Treino - {{ data_get($workout, 'title', 'Sem título') }}</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+
     <style>
         @page{
             margin: 0px 25px;
@@ -148,7 +151,7 @@
                             <th class="border p-2 bg-blue-500 text-white">Método</th>
                             <th class="border p-2 bg-blue-500 text-white">Séries</th>
                             <th class="border p-2 bg-blue-500 text-white">Repetições</th>
-                            <th class="border p-2 bg-blue-500 text-white">Peso</th>
+                            <th class="border p-2 bg-blue-500 text-white">Carga</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -165,8 +168,6 @@
                 </table>
             @endforeach
         </div>
-
-  
     </div>
 </body>
 

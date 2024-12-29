@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\StudentResource\Pages;
 
 use App\Filament\Resources\StudentResource;
+use App\Filament\Resources\StudentResource\Widgets\AttendanceLineChartWidget;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Support\Arr;
@@ -35,20 +36,14 @@ class EditStudent extends EditRecord
                 ->color('primary')
                 ->icon('heroicon-o-rectangle-stack')
                 ->url(fn () => route('filament.admin.resources.workouts.create'))
-                ->visible(fn () => empty($this->record->workout_id))
-                
-                
+                ->visible(fn () => empty($this->record->workout_id)),
         ];
     }
 
     protected function mutateFormDataBeforeFill(array $data): array
     {
-        // Verifica se o Student tem um principal_workout
         if ($this->record->principal_workout) {
-            // Carrega o workout com seus relacionamentos
             $principalWorkout = $this->record->principal_workout->load('workout_divisions.workout_division_exercises');
-
-            // Adiciona os dados ao formulário
             $data['principal_workout'] = $principalWorkout->toArray();
         }
 
@@ -60,13 +55,11 @@ class EditStudent extends EditRecord
         if (isset($data['principal_workout'])) {
             $workoutData = $data['principal_workout'];
 
-            // Atualiza ou cria o workout
             $principalWorkout = $this->record->principal_workout()->updateOrCreate(
                 ['id' => $this->record->principal_workout->id ?? null],
                 Arr::except($workoutData, ['workout_divisions'])
             );
 
-            // Atualiza as divisões do workout
             if (isset($workoutData['workout_divisions'])) {
                 foreach ($workoutData['workout_divisions'] as $divisionData) {
                     $division = $principalWorkout->workout_divisions()->updateOrCreate(
@@ -74,7 +67,6 @@ class EditStudent extends EditRecord
                         Arr::except($divisionData, ['workout_division_exercises'])
                     );
 
-                    // Atualiza os exercícios dentro da divisão
                     if (isset($divisionData['workout_division_exercises'])) {
                         foreach ($divisionData['workout_division_exercises'] as $exerciseData) {
                             $division->workout_division_exercises()->updateOrCreate(
@@ -90,5 +82,14 @@ class EditStudent extends EditRecord
         }
 
         return $data;
+    }
+
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            AttendanceLineChartWidget::make([
+                'studentId' => $this->record->id,
+            ]),
+        ];
     }
 }

@@ -61,6 +61,7 @@ class AttendanceSearchWidget extends Widget implements HasForms
             ]);
 
             $birthdayMessage = $attendance->student->daysUntilBirthday();
+            $dueDateMessage = $attendance->student->workout->message_until_due_date();
 
             Notification::make()
                 ->title('Presença marcada com Sucesso')
@@ -72,6 +73,13 @@ class AttendanceSearchWidget extends Widget implements HasForms
                 Notification::make()
                     ->title($birthdayMessage)
                     ->info()
+                    ->seconds(5)
+                    ->send();
+            }
+            if ($dueDateMessage) {
+                Notification::make()
+                    ->title($dueDateMessage)
+                    ->warning()
                     ->seconds(5)
                     ->send();
             }

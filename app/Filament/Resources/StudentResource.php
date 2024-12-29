@@ -3,12 +3,8 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\StudentResource\Pages;
-use App\Models\Exercise;
-use App\Models\Method;
+use App\Filament\Resources\StudentResource\Widgets\AttendanceLineChartWidget;
 use App\Models\Student;
-use App\Models\WorkoutType;
-use Awcodes\TableRepeater\Components\TableRepeater;
-use Awcodes\TableRepeater\Header;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Form;
