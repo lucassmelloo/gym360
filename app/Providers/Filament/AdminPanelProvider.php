@@ -28,6 +28,9 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->plugins([
+                \FilipFonal\FilamentLogManager\FilamentLogManager::make()
+            ])
             ->colors([
                 'primary' => Color::Amber,
             ])

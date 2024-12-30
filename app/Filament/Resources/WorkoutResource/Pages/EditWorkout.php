@@ -31,7 +31,7 @@ class EditWorkout extends EditRecord
                     // Notificação de sucesso
                     Notification::make()
                         ->title('Treino atualizado com sucesso!')
-                        ->body("O treino '{$record->title}' agora é o principal para o estudante {$record->student->name}.")
+                        ->body("Este treino agora é o principal para o estudante {$record->student->name}.")
                         ->success()
                         ->send();
                 } else {

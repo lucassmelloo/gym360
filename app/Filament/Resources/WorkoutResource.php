@@ -150,8 +150,10 @@ class WorkoutResource extends Resource
                     ->numeric()
                     ->sortable(),
 
-                Tables\Columns\IconColumn::make('public')
-                    ->icon('heroicon-o-eye'),
+                Tables\Columns\TextColumn::make('due_date')
+                    ->label('Validade')
+                    ->date('d/m/Y'),
+                
             ])
             ->filters([
                 SelectFilter::make('Aluno')

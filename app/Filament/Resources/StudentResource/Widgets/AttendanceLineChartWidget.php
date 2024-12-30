@@ -23,6 +23,7 @@ class AttendanceLineChartWidget extends ChartWidget
                     ],
                 ],
     ];
+    
     // Parâmetro opcional para filtrar por aluno
     public ?int $studentId = null;
 

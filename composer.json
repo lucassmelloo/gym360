@@ -16,6 +16,7 @@
         "codeat3/blade-phosphor-icons": "^2.2",
         "dompdf/dompdf": "^3.0",
         "filament/filament": "^3.2",
+        "filipfonal/filament-log-manager": "^2.0",
         "flowframe/laravel-trend": "^0.3.0",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
