@@ -13,8 +13,8 @@ class SendEmailsJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public $emails;
-    public $subject;
+    public array $emails;
+    public string $subject;
     public $body;
 
     /**
@@ -32,6 +32,7 @@ class SendEmailsJob implements ShouldQueue
      */
     public function handle()
     {
+
         foreach ($this->emails as $email) {
             Mail::to($email)->send(new \App\Mail\CustomEmail($this->subject, $this->body));
         }

@@ -14,17 +14,8 @@ class RecipientEmailSeeder extends Seeder
     {
         $recipient_emails = [
             'all_students' => 'Todos os Estudantes',
-            'active_students' => 'Todos os Estudantes Inativos',
-            'inactive_students' => 'Todos os Estudantes Ativos',
-
             'all_users' => 'Todos os Usuários',
-            'active_users' => 'Todos os Usuários Ativos',
-            'inactive_users' => 'Todos os Usuários Inativos',
-
             'all_students_and_users' => 'Todos os Usuários e Estudantes',
-            'active_students_and_users' => 'Todos os Usuários e Estudantes Inativos',
-            'inactive_students_and_users' => 'Todos os Usuários e Estudantes Inativos',
-
             'none' => 'Nenhum',
         ];
 

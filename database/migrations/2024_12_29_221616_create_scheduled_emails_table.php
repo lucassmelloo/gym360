@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->string('subject');
             $table->text('body');
-            $table->text('others_recipients');
+            $table->text('others_recipients')->nullable();
             $table->foreignIdFor(RecipientEmail::class)->constrained();
             $table->timestamp('scheduled_at');
             $table->enum('status', ['pending', 'sent', 'failed'])->default('pending');

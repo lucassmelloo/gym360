@@ -33,10 +33,10 @@ class ScheduledEmailResource extends Resource
                     ->label('Corpo do E-mail')
                     ->columnSpanFull()
                     ->required(),
-                Forms\Components\Select::make('recipients')
+                Forms\Components\Select::make('recipient_email_id')
                     ->label('Destinatários')
                     ->options(
-                        \App\Models\RecipientEmail::all()->pluck('description', 'name')
+                        \App\Models\RecipientEmail::all()->pluck('description', 'id')
                     )
                     ->required(),
                 Forms\Components\TextInput::make('others_recipients')
@@ -45,9 +45,32 @@ class ScheduledEmailResource extends Resource
                     ->label('Agendado para')
                     ->seconds(false)
                     ->required(),
-                Forms\Components\Hidden::make('status')
-                    ->default('pending')
+                Forms\Components\Select::make('status')
+                    ->options(['pending' => 'Pendente', 'sent' => 'Enviado', 'failed' => 'Falhou'])
                     ->required(),
+
+
+                Forms\Components\Section::make([
+                    Forms\Components\Repeater::make('logs')
+                        ->label('Logs de Envio')
+                        ->relationship('email_logs') // Define a relação com o modelo EmailLog
+                        ->schema([
+                            Forms\Components\TextInput::make('recipient')
+                                ->label('Destinatário')
+                                ->disabled(),
+                            Forms\Components\TextInput::make('status')
+                                ->label('Status')
+                                ->disabled(),
+                            Forms\Components\Textarea::make('error_message')
+                                ->label('Erro')
+                                ->disabled(),
+                            Forms\Components\DateTimePicker::make('created_at')
+                                ->label('Data de Envio')
+                                ->disabled(),
+                        ])
+                        ->addable(false) // Impede que o usuário adicione registros manualmente
+                ])->columnSpanFull()
+                ->hiddenOn('create'),
             ]);
     }
 
@@ -59,7 +82,7 @@ class ScheduledEmailResource extends Resource
                     ->label('Assunto')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('recipients')
+                Tables\Columns\TextColumn::make('recipient_email.name')
                     ->label('Destinatários')
                     ->searchable()
                     ->sortable(),
@@ -70,6 +93,12 @@ class ScheduledEmailResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('status')
                     ->label('Status')
+                    ->badge()
+                    ->color(fn (string $state):string => match ($state) {
+                        'pending' => 'warning',
+                        'sent' => 'success',
+                        'failed' => 'danger',
+                    })
                     ->searchable()
                     ->sortable(),
             ])
@@ -100,7 +129,7 @@ class ScheduledEmailResource extends Resource
 
     public static function getPluralLabel(): ?string
     {
-        return 'Agendar E-mails';   
+        return 'Agendar E-mails';
     }
 
     public static function getPages(): array

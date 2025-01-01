@@ -3,24 +3,24 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ScheduledEmail extends Model
 {
-    protected $fillable = [
-        'subject',
-        'body',
-        'recipients',
-        'scheduled_at',
-        'status',
-    ];
+    protected $guarded = [];
 
     protected $casts = [
         'scheduled_at' => 'datetime',
     ];
 
-    public function recipients()
+    public function recipient_email(): BelongsTo
     {
         return $this->belongsTo(RecipientEmail::class);
+    }
+
+    public function email_logs()
+    {
+        return $this->hasMany(EmailLog::class);
     }
 
     public function othersRecipients(): array
@@ -58,8 +58,17 @@ class ScheduledEmail extends Model
         $this->update(['status' => 'pending']);
     }
 
-    public function getAllRecipientsAttribute()
+    public function getRecipients()
     {
-        return array_merge([$this->recipients->pluck()], $this->othersRecipients());
+        // Recupera os emails com base no tipo de destinatário
+        $recipientEmails = $this->recipient_email->getEmails() ?? [];
+
+        // Se houver outros destinatários, adiciona-os
+        $otherRecipients = $this->others_recipients
+            ? array_map('trim', explode(';', $this->others_recipients))
+            : [];
+
+        // Faz o merge e remove duplicados
+        return array_unique(array_merge($recipientEmails, $otherRecipients));
     }
 }

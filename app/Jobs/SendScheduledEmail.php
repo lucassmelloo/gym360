@@ -6,8 +6,10 @@ use App\Models\ScheduledEmail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Log\Logger;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class SendScheduledEmail implements ShouldQueue
@@ -29,19 +31,44 @@ class SendScheduledEmail implements ShouldQueue
      */
     public function handle()
     {
-        // Enviar email para os destinatários
-        $recipients = explode(',', $this->scheduledEmail->others_recipients);
-        
-        foreach ($recipients as $email) {
-            Mail::send([], [], function ($message) use ($email) {
-                $message->to(trim($email))
-                    ->subject($this->scheduledEmail->subject)
-                    ->html($this->scheduledEmail->body);
-            });
-        }
+        // Obter os destinatários
+        $emails = $this->scheduledEmail->getRecipients();
 
-        dd('lucas');
-        // Atualizar status do email para "enviado"
-        //$this->scheduledEmail->markAsSent();
+        foreach ($emails as $email) {
+            try {
+
+                Mail::send([], [], function ($message) use ($email) {
+                    $message->to(trim($email))
+                        ->subject($this->scheduledEmail->subject)
+                        ->html(
+                            view('emails.default',['body' => $this->scheduledEmail->body])->render()
+                        );
+                });
+
+                // Registrar log de sucesso para este destinatário
+                \App\Models\EmailLog::create([
+                    'scheduled_email_id' => $this->scheduledEmail->id,
+                    'recipient' => $email,
+                    'status' => 'success',
+                ]);
+            } catch (\Exception $e) {
+                // Registrar log de falha para este destinatário
+                \App\Models\EmailLog::create([
+                    'scheduled_email_id' => $this->scheduledEmail->id,
+                    'recipient' => $email,
+                    'status' => 'failed',
+                    'error_message' => $e->getMessage(),
+                ]);
+
+                // Você pode optar por não parar todo o processo ao encontrar erros, mas registrar o problema.
+                continue;
+            }
+        }
+        // Atualizar status geral do email agendado
+        if ($this->scheduledEmail->email_logs->contains('status', 'failed')) {
+            $this->scheduledEmail->markAsFailed();
+        } else {
+            $this->scheduledEmail->markAsSent();
+        }
     }
 }

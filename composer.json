@@ -19,7 +19,9 @@
         "filipfonal/filament-log-manager": "^2.0",
         "flowframe/laravel-trend": "^0.3.0",
         "laravel/framework": "^11.9",
+        "laravel/horizon": "^5.30",
         "laravel/tinker": "^2.9",
+        "predis/predis": "^2.3",
         "troccoli/blade-health-icons": "^4.0",
         "ysfkaya/filament-phone-input": "^3.1"
     },
