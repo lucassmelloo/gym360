@@ -20,6 +20,7 @@ return new class extends Migration
             $table->text('observation')->nullable();
             $table->date('date_of_birth');
             $table->foreignIdFor(Workout::class)->nullable();
+            $table->softDeletes();
             $table->timestamps();
 
         });

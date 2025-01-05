@@ -7,12 +7,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 
 class Student extends Model
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, SoftDeletes;
 
     protected $guarded = [];
 
@@ -52,7 +53,7 @@ class Student extends Model
         })->get();
     }
 
-    public function daysUntilBirthday(): ?string
+    public function message_until_birthday(): ?string
     {
         if (! $this->date_of_birth) {
             return null;
@@ -84,6 +85,34 @@ class Student extends Model
 
         if ($daysUntil <= 5) {
             return "Faltam {$daysUntil} dias para o aniversário de {$this->name}.";
+        }
+
+        return null;
+    }
+
+    public function days_until_birthday(): ?int
+    {
+        if (! $this->date_of_birth) {
+            return null;
+        }
+
+        // Normalizar para garantir que apenas a data (sem horas) seja considerada
+        $today = now()->startOfDay();
+        $dateOfBirth = $this->date_of_birth->copy()->startOfDay();
+
+        // Determinar o próximo aniversário
+        $nextBirthday = $dateOfBirth->setYear($today->year);
+
+        // Ajustar para o próximo ano se o aniversário já passou
+        if ($nextBirthday->lessThan($today)) {
+            $nextBirthday->addYear();
+        }
+
+        // Calcular diferença em dias
+        $daysUntil = $today->diffInDays($nextBirthday);
+
+        if ($daysUntil <= 5) {
+            return $daysUntil;
         }
 
         return null;

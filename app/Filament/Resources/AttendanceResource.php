@@ -29,7 +29,7 @@ class AttendanceResource extends Resource
                     ->relationship('student', 'name')
                     ->required(),
                 Forms\Components\DatePicker::make('attendance_date')
-                    ->required(),
+                    ->required()
             ]);
     }
 
@@ -42,6 +42,10 @@ class AttendanceResource extends Resource
                     ->numeric()
                     ->sortable()
                     ->searchable(),
+                Tables\Columns\TextColumn::make('attendance_date')
+                    ->label('Data Presença')
+                    ->date('d/m/Y')
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('attendance_date')
                     ->label('Data Presença')
                     ->date('d/m/Y')

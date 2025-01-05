@@ -47,6 +47,15 @@ class AttendanceSearchWidget extends Widget implements HasForms
             ->model(Attendance::class);
     }
 
+    protected function updateHiddenFields($studentId, $set): void
+    {
+        $student = Student::find($studentId);
+
+        // Atualiza os campos com base no estudante selecionado
+        $set('days_until_birth', $student?->days_until_birthday());
+        $set('days_until_workout', $student?->workout?->days_until_due_date);
+    }
+
     public function saveAttendance(): null
     {
 
@@ -57,10 +66,10 @@ class AttendanceSearchWidget extends Widget implements HasForms
             $attendance = Attendance::create([
                 'user_id' => $data['user_id'],
                 'student_id' => $data['student_id'],
-                'attendance_date' => $data['attendance_date'],
+                'attendance_date' => $data['attendance_date']
             ]);
 
-            $birthdayMessage = $attendance->student->daysUntilBirthday();
+            $birthdayMessage = $attendance->student->message_until_birthday();
             $dueDateMessage = $attendance->student->workout->message_until_due_date();
 
             Notification::make()

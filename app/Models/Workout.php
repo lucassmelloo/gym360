@@ -46,7 +46,7 @@ class Workout extends Model
         return $this->hasMany(WorkoutDivisionExercise::class);
     }
 
-    public function message_until_due_date(): string
+    public function message_until_due_date(): ?string
     {
         $today = now()->startOf('day');
         $due_date = $this->due_date->startOf('day');
@@ -59,6 +59,19 @@ class Workout extends Model
         }
         if($today->diffInDays($due_date) <= 5) {
             return 'Faltam ' . $today->diffInDays($due_date) . ' dias para o vencimento do Treino.';
+        }
+
+        return null;
+    }
+
+    public function days_until_due_date(): ?int
+    {
+        $today = now()->startOf('day');
+        $due_date = $this->due_date->startOf('day');
+
+
+        if($today->diffInDays($due_date) <= 5) {
+            return $today->diffInDays($due_date);
         }
 
         return null;
